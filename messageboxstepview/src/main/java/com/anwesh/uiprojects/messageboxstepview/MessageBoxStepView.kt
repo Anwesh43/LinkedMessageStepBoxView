@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.messageboxstepview
  * Created by anweshmishra on 26/09/18.
  */
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Paint
 import android.graphics.Canvas
@@ -192,6 +193,14 @@ class MessageBoxStepView(ctx : Context) : View(ctx) {
             msb.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : MessageBoxStepView {
+            val view : MessageBoxStepView = MessageBoxStepView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
