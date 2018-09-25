@@ -171,4 +171,25 @@ class MessageBoxStepView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : MessageBoxStepView) {
+        private val msb : MessageStepBox = MessageStepBox(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            msb.draw(canvas, paint)
+            animator.animate {
+                msb.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            msb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
