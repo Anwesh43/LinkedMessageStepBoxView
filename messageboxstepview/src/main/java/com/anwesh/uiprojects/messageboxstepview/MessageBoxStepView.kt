@@ -14,6 +14,32 @@ import android.view.View
 
 val nodes : Int = 5
 
+fun Canvas.drawMBSNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = h / (nodes + 1)
+    val boxSize : Float = gap/3
+    val tipSize = gap / 10
+    val sc1 : Float = Math.min(0.5f, scale) * 2
+    val sc2 : Float = Math.min(0.5f, Math.max(scale - 0.5f, 0f)) * 2
+    paint.strokeWidth = Math.min(w, h) / 60
+    paint.strokeCap = Paint.Cap.ROUND
+    paint.color = Color.parseColor("#283593")
+    paint.style = Paint.Style.STROKE
+    save()
+    translate(w/2, gap + i * gap)
+    val path : Path = Path()
+    path.moveTo(-boxSize/2, -boxSize * sc1)
+    path.lineTo(boxSize/2, -boxSize * sc1)
+    path.lineTo(boxSize/2, 0f)
+    path.lineTo(tipSize, 0f)
+    path.lineTo(0f, tipSize * sc2)
+    path.lineTo(-tipSize, 0f)
+    path.lineTo(-boxSize/2, 0f)
+    drawPath(path, paint)
+    restore()
+}
+
 class MessageBoxStepView(ctx : Context) : View(ctx) {
 
     private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
