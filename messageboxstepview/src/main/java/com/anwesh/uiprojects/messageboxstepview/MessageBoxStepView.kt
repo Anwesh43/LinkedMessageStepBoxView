@@ -19,7 +19,7 @@ fun Canvas.drawMBSNode(i : Int, scale : Float, paint : Paint) {
     val w : Float = width.toFloat()
     val h : Float = height.toFloat()
     val gap : Float = h / (nodes + 1)
-    val boxSize : Float = gap/3
+    val boxSize : Float = gap/2
     val tipSize = gap / 10
     val sc1 : Float = Math.min(0.5f, scale) * 2
     val sc2 : Float = Math.min(0.5f, Math.max(scale - 0.5f, 0f)) * 2
@@ -30,13 +30,14 @@ fun Canvas.drawMBSNode(i : Int, scale : Float, paint : Paint) {
     save()
     translate(w/2, gap + i * gap)
     val path : Path = Path()
-    path.moveTo(-boxSize/2, -boxSize * sc1)
-    path.lineTo(boxSize/2, -boxSize * sc1)
-    path.lineTo(boxSize/2, 0f)
+    path.moveTo(-boxSize, -boxSize * sc1)
+    path.lineTo(boxSize, -boxSize * sc1)
+    path.lineTo(boxSize, 0f)
     path.lineTo(tipSize, 0f)
     path.lineTo(0f, tipSize * sc2)
     path.lineTo(-tipSize, 0f)
-    path.lineTo(-boxSize/2, 0f)
+    path.lineTo(-boxSize, 0f)
+    path.lineTo(-boxSize, -boxSize * sc1)
     drawPath(path, paint)
     restore()
 }
